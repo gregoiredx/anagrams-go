@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"strconv"
 	"strings"
 )
 
@@ -74,6 +75,9 @@ func main() {
 	}
 	words := readFileLines(wordFilePath)
 	minNumber := 4
+	if(len(os.Args) > 2){
+		minNumber, _ = strconv.Atoi(os.Args[2])
+	}
 	anagramsList := FindAnagramsInList(words, minNumber)
 	for _, anagrams := range anagramsList {
 		fmt.Println(strings.Join(anagrams, " "))

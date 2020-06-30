@@ -68,7 +68,11 @@ func readFileLines(filePath string) []string {
 }
 
 func main() {
-	words := readFileLines("/usr/share/dict/words")
+	wordFilePath := "/usr/share/dict/words"
+	if(len(os.Args) > 1){
+		wordFilePath = os.Args[1]
+	}
+	words := readFileLines(wordFilePath)
 	minNumber := 4
 	anagramsList := FindAnagramsInList(words, minNumber)
 	for _, anagrams := range anagramsList {

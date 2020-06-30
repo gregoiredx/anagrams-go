@@ -70,12 +70,12 @@ func readFileLines(filePath string) []string {
 
 func main() {
 	wordFilePath := "/usr/share/dict/words"
-	if(len(os.Args) > 1){
+	if len(os.Args) > 1 {
 		wordFilePath = os.Args[1]
 	}
 	words := readFileLines(wordFilePath)
 	minNumber := 4
-	if(len(os.Args) > 2){
+	if len(os.Args) > 2 {
 		minNumber, _ = strconv.Atoi(os.Args[2])
 	}
 	anagramsList := FindAnagramsInList(words, minNumber)

@@ -73,11 +73,11 @@ func main() {
 	if len(os.Args) > 1 {
 		wordFilePath = os.Args[1]
 	}
-	words := readFileLines(wordFilePath)
 	minNumber := 4
 	if len(os.Args) > 2 {
 		minNumber, _ = strconv.Atoi(os.Args[2])
 	}
+	words := readFileLines(wordFilePath)
 	anagramsList := FindAnagramsInList(words, minNumber)
 	for _, anagrams := range anagramsList {
 		fmt.Println(strings.Join(anagrams, " "))

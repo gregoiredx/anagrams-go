@@ -3,6 +3,10 @@ package main
 import (
 	"fmt"
 	"encoding/json"
+	"bufio"
+	"os"
+	"log"
+	"strings"
 )
 
 
@@ -16,10 +20,10 @@ func FindAnagramsInList(words []string) [][]string {
 			anagramsMap[lettersKey] = []string{word}
 		}
 	}
-	return anagramsMapValues(anagramsMap)
+	return anagramsMapToList(anagramsMap)
 }
 
-func anagramsMapValues(anagramsMap map[string][]string) [][]string {
+func anagramsMapToList(anagramsMap map[string][]string) [][]string {
 	anagramsList := make([][]string, 0, len(anagramsMap))
 	for _, anagrams := range anagramsMap {
 		anagramsList = append(anagramsList, anagrams)
@@ -45,6 +49,27 @@ func wordToLettersMap(word string) map[rune]int {
 	return lettersMap
 }
 
+func readFileLines(filePath string) []string {
+	file, err := os.Open(filePath)
+    if err != nil {
+        log.Fatal(err)
+    }
+    defer file.Close()
+	scanner := bufio.NewScanner(file)
+	lines := []string{}
+    for scanner.Scan() {
+		lines = append(lines, scanner.Text())
+    }
+    if err := scanner.Err(); err != nil {
+        log.Fatal(err)
+	}
+	return lines
+}
+
 func main() {
-	fmt.Println("Hello, world.")
+	words := readFileLines("/usr/share/dict/words")
+	anagramsList := FindAnagramsInList(words)
+	for _, anagrams := range anagramsList {
+		fmt.Println(strings.Join(anagrams, " "))
+	}
 }

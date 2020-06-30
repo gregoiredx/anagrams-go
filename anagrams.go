@@ -1,14 +1,13 @@
 package main
 
 import (
-	"fmt"
-	"encoding/json"
 	"bufio"
-	"os"
+	"encoding/json"
+	"fmt"
 	"log"
+	"os"
 	"strings"
 )
-
 
 func FindAnagramsInList(words []string, minNumber int) [][]string {
 	anagramsMap := make(map[string][]string)
@@ -16,7 +15,7 @@ func FindAnagramsInList(words []string, minNumber int) [][]string {
 		lettersKey := wordToLettersKey(word)
 		if anagrams, ok := anagramsMap[lettersKey]; ok {
 			anagramsMap[lettersKey] = append(anagrams, word)
-		}else{
+		} else {
 			anagramsMap[lettersKey] = []string{word}
 		}
 	}
@@ -53,17 +52,17 @@ func wordToLettersMap(word string) map[rune]int {
 
 func readFileLines(filePath string) []string {
 	file, err := os.Open(filePath)
-    if err != nil {
-        log.Fatal(err)
-    }
-    defer file.Close()
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer file.Close()
 	scanner := bufio.NewScanner(file)
 	lines := []string{}
-    for scanner.Scan() {
+	for scanner.Scan() {
 		lines = append(lines, scanner.Text())
-    }
-    if err := scanner.Err(); err != nil {
-        log.Fatal(err)
+	}
+	if err := scanner.Err(); err != nil {
+		log.Fatal(err)
 	}
 	return lines
 }

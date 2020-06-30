@@ -10,10 +10,9 @@ func TestFindAnagramsInList(t *testing.T) {
 
 	expected := [][]string{[]string{"ab", "ba"}, []string{"z"}, []string{"zz"}}
 	if !reflect.DeepEqual(anagrams, expected) {
-        t.Errorf("Expected %s, got%s",expected, anagrams)
-    }
+		t.Errorf("Expected %s, got%s", expected, anagrams)
+	}
 }
-
 
 func TestFindAnagramsInListWithMinNumber(t *testing.T) {
 	words := []string{"ab", "ba", "z"}
@@ -22,6 +21,6 @@ func TestFindAnagramsInListWithMinNumber(t *testing.T) {
 
 	expected := [][]string{[]string{"ab", "ba"}}
 	if !reflect.DeepEqual(anagrams, expected) {
-        t.Errorf("Expected %s, got%s",expected, anagrams)
-    }
+		t.Errorf("Expected %s, got%s", expected, anagrams)
+	}
 }

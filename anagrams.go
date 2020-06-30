@@ -10,7 +10,7 @@ import (
 )
 
 
-func FindAnagramsInList(words []string) [][]string {
+func FindAnagramsInList(words []string, minNumber int) [][]string {
 	anagramsMap := make(map[string][]string)
 	for _, word := range words {
 		lettersKey := wordToLettersKey(word)
@@ -20,13 +20,15 @@ func FindAnagramsInList(words []string) [][]string {
 			anagramsMap[lettersKey] = []string{word}
 		}
 	}
-	return anagramsMapToList(anagramsMap)
+	return anagramsMapToList(anagramsMap, minNumber)
 }
 
-func anagramsMapToList(anagramsMap map[string][]string) [][]string {
+func anagramsMapToList(anagramsMap map[string][]string, minNumber int) [][]string {
 	anagramsList := make([][]string, 0, len(anagramsMap))
 	for _, anagrams := range anagramsMap {
-		anagramsList = append(anagramsList, anagrams)
+		if len(anagrams) >= minNumber {
+			anagramsList = append(anagramsList, anagrams)
+		}
 	}
 	return anagramsList
 }
@@ -68,7 +70,8 @@ func readFileLines(filePath string) []string {
 
 func main() {
 	words := readFileLines("/usr/share/dict/words")
-	anagramsList := FindAnagramsInList(words)
+	minNumber := 4
+	anagramsList := FindAnagramsInList(words, minNumber)
 	for _, anagrams := range anagramsList {
 		fmt.Println(strings.Join(anagrams, " "))
 	}
